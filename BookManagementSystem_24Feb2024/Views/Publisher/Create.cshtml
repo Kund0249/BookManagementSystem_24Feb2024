@@ -1,0 +1,30 @@
+﻿@*@model BMS.DataModel.Publisher*@
+@model Publisher
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-6 offset-3">
+           
+            <form asp-action="Create" asp-controller="Publisher" method="post">
+                <div class="mt-2">
+                    <label class="form-label">Publisher</label>
+                    @*@Html.TextBoxFor(x => x.PublisherName,"",new {@class="form-control" })*@
+                    <input asp-for="PublisherName" class="form-control" />
+                </div>
+                <div class="mt-2">
+                    <label class="form-label">Registration No.</label>
+                    <input asp-for="RegNo" class="form-control" />
+                </div>
+                <div class="mt-2">
+                   <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

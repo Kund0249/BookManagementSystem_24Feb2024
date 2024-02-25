@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.34407.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookManagementSystem_24Feb2024", "BookManagementSystem_24Feb2024\BookManagementSystem_24Feb2024.csproj", "{62323246-B13E-4B09-97D4-AF24F51DE5AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookManagementSystem_24Feb2024", "BookManagementSystem_24Feb2024\BookManagementSystem_24Feb2024.csproj", "{62323246-B13E-4B09-97D4-AF24F51DE5AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMS.DataModel", "BMS.DataModel\BMS.DataModel.csproj", "{51611713-B821-43A6-A139-D7BC7636E98B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMS.DataLayer", "BMS.DataLayer\BMS.DataLayer.csproj", "{461F83E7-79CB-40E3-B6FD-CEA6DE89F992}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{62323246-B13E-4B09-97D4-AF24F51DE5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62323246-B13E-4B09-97D4-AF24F51DE5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62323246-B13E-4B09-97D4-AF24F51DE5AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51611713-B821-43A6-A139-D7BC7636E98B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51611713-B821-43A6-A139-D7BC7636E98B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51611713-B821-43A6-A139-D7BC7636E98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51611713-B821-43A6-A139-D7BC7636E98B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461F83E7-79CB-40E3-B6FD-CEA6DE89F992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461F83E7-79CB-40E3-B6FD-CEA6DE89F992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461F83E7-79CB-40E3-B6FD-CEA6DE89F992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461F83E7-79CB-40E3-B6FD-CEA6DE89F992}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using BMS.DataLayer.Publisher;
 
 
 namespace BookManagementSystem_24Feb2024
@@ -12,6 +13,8 @@ namespace BookManagementSystem_24Feb2024
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSingleton<IPublisherRepository, PublisherRepository>();
             
         }
         //Configure your Application Request-Response Pipeline
@@ -51,9 +54,10 @@ namespace BookManagementSystem_24Feb2024
             //{
             //   await context.Response.WriteAsync("Hello from Middleware - Last\n");
             //});
-            
-            //add your middleware to capture request and response time
 
+            //add your middleware to capture request and response time
+            app.UseDeveloperExceptionPage();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(Endpoint =>
             {

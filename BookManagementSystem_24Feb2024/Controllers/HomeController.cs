@@ -8,9 +8,10 @@ namespace BookManagementSystem_24Feb2024.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        public IActionResult Index()
         {
-            return "Hello from Home Controller";
+            //return "Hello from Home Controller";
+            return View();
         }
     }
 }
