@@ -11,5 +11,8 @@ namespace BMS.DataLayer.Publisher
     {
         public List<DataModel.Publisher> GetPublishers();
         public bool Add(DataModel.Publisher publisher);
+        public bool Update(DataModel.Publisher publisher);
+        public bool Remove(int PublisherId);
+        public DataModel.Publisher GetPublisher(int PublisherId);
     }
 }

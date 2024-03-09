@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BMS.DataLayer.Publisher
 {
-  public  class PublisherRepository2 : IPublisherRepository
+  public  class PublisherRepository2 //: IPublisherRepository
     {
         public bool Add(DataModel.Publisher publisher)
         {

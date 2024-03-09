@@ -10,6 +10,12 @@
 </head>
 <body>
     <div class="row">
+        <div class="mb-2 mt-3 col-md-6 offset-3">
+            <a class="btn btn-sm btn-primary" asp-action="Create">+Add</a>
+        </div>
+    </div>
+    <div class="row">
+       
         <div class="col-md-6 offset-3">
             <table class="table">
                 <thead>
@@ -34,7 +40,12 @@
                                 <td>@item.PublisherName</td>
                                 <td>@item.RegNo</td>
                                 <td>
-                                    Edit|Remove
+                                    <form asp-action="Delete" asp-route-id="@item.PublisherId" method="post">
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                            <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.PublisherId">Edit</a>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         }

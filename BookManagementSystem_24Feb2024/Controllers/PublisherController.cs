@@ -37,5 +37,30 @@ namespace BookManagementSystem_24Feb2024.Controllers
             repository.Add(model);
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var publisher = repository.GetPublisher(id);
+
+            if(publisher != null)
+              return View(publisher);
+            else
+                return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Publisher model)
+        {
+            repository.Update(model);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            repository.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -31,5 +31,58 @@ namespace BMS.DataLayer.Publisher
                 return false;
             }
         }
+
+        public bool Update(DataModel.Publisher publisher)
+        {
+            try
+            {
+                var model = db.Publishers.Find(publisher.PublisherId);
+                if(model != null)
+                {
+                    model.PublisherName = publisher.PublisherName;
+                    model.RegNo = publisher.RegNo;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool Remove(int PublisherId)
+        {
+            try
+            {
+                var publisher = db.Publishers.Find(PublisherId);
+                if(publisher != null)
+                {
+                    db.Publishers.Remove(publisher);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public DataModel.Publisher GetPublisher(int PublisherId)
+        {
+            try
+            {
+                var publisher = db.Publishers.Find(PublisherId);
+                
+                return publisher;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }
