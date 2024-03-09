@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using BMS.DataLayer.Publisher;
-
+using BMS.DataLayer.Author;
+using BMS.DataLayer.Book;
 
 namespace BookManagementSystem_24Feb2024
 {
@@ -15,7 +16,9 @@ namespace BookManagementSystem_24Feb2024
             services.AddMvc();
 
             services.AddSingleton<IPublisherRepository, PublisherRepository>();
-            
+            services.AddSingleton<IAuthorRespository, AuthorRespository>();
+            services.AddSingleton<IBookRepository, BookRepository>();
+
         }
         //Configure your Application Request-Response Pipeline
         public void Configure(IApplicationBuilder app)

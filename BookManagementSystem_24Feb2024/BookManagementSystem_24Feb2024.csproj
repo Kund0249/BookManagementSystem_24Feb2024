@@ -17,9 +17,4 @@
     <ProjectReference Include="..\BMS.DataModel\BMS.DataModel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 </Project>

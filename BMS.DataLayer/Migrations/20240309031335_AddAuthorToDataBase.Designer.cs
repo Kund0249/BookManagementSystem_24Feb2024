@@ -3,14 +3,16 @@ using BMS.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BMS.DataLayer.Migrations
 {
     [DbContext(typeof(DbContext))]
-    partial class DbContextModelSnapshot : ModelSnapshot
+    [Migration("20240309031335_AddAuthorToDataBase")]
+    partial class AddAuthorToDataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,35 +44,6 @@ namespace BMS.DataLayer.Migrations
                     b.ToTable("TAUTHOR");
                 });
 
-            modelBuilder.Entity("BMS.DataModel.Book", b =>
-                {
-                    b.Property<int>("BookId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("BookName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ISBN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.HasKey("BookId");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("TBOOKS");
-                });
-
             modelBuilder.Entity("BMS.DataModel.Publisher", b =>
                 {
                     b.Property<int>("PublisherId")
@@ -87,22 +60,6 @@ namespace BMS.DataLayer.Migrations
                     b.HasKey("PublisherId");
 
                     b.ToTable("TPUBLISHER");
-                });
-
-            modelBuilder.Entity("BMS.DataModel.Book", b =>
-                {
-                    b.HasOne("BMS.DataModel.Author", "author")
-                        .WithMany("Books")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("author");
-                });
-
-            modelBuilder.Entity("BMS.DataModel.Author", b =>
-                {
-                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

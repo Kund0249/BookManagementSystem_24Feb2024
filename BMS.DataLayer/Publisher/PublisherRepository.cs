@@ -16,6 +16,10 @@ namespace BMS.DataLayer.Publisher
         public List<DataModel.Publisher> GetPublishers()
         {
             return db.Publishers.ToList();
+            //using(SqlConnection con = new SqlConnection(CS))
+            //{
+            //    SqlCommand cmd = new SqlCommand("", con);
+            //}
         }
 
         public bool Add(DataModel.Publisher model)
