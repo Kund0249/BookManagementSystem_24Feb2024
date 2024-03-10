@@ -64,7 +64,7 @@ namespace BookManagementSystem_24Feb2024
             app.UseRouting();
             app.UseEndpoints(Endpoint =>
             {
-                Endpoint.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                Endpoint.MapControllerRoute("default", "{controller=Book}/{action=Index}/{id?}");
             });
         }
     }

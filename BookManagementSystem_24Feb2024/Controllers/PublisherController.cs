@@ -9,8 +9,8 @@ using BMS.DataLayer.Publisher;
 
 namespace BookManagementSystem_24Feb2024.Controllers
 {
-    
-    public class PublisherController : Controller
+
+    public class PublisherController : BaseController
     {
         private readonly IPublisherRepository repository;
 
@@ -34,8 +34,19 @@ namespace BookManagementSystem_24Feb2024.Controllers
         [HttpPost]
         public IActionResult Create(Publisher model)
         {
-            repository.Add(model);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                if (repository.Add(model))
+                {
+                    Notify("Save", "Record Created Successfully.", MessagetType.success);
+
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+           
+            Notify("Error", "Record not created.", MessagetType.error);
+
+            return View(model);
         }
 
         [HttpGet]
@@ -43,8 +54,8 @@ namespace BookManagementSystem_24Feb2024.Controllers
         {
             var publisher = repository.GetPublisher(id);
 
-            if(publisher != null)
-              return View(publisher);
+            if (publisher != null)
+                return View(publisher);
             else
                 return RedirectToAction(nameof(Index));
         }
@@ -52,15 +63,32 @@ namespace BookManagementSystem_24Feb2024.Controllers
         [HttpPost]
         public IActionResult Edit(Publisher model)
         {
-            repository.Update(model);
-            return RedirectToAction(nameof(Index));
+            if (repository.Update(model))
+            {
+                Notify("Save", "Record Update Successfully.", MessagetType.success);
+
+                return RedirectToAction(nameof(Index));
+            }
+            Notify("Error", "Record not updated.", MessagetType.error);
+            return View(model);
+
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            repository.Remove(id);
+            if (repository.Remove(id))
+            {
+                Notify("Removed", "Record Removed Successfully.", MessagetType.success);
+            }
+            else
+            {
+                Notify("Error", "Record not removed.", MessagetType.error);
+
+            }
+
             return RedirectToAction(nameof(Index));
+
         }
     }
 }

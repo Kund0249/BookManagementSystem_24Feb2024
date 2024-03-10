@@ -8,6 +8,21 @@
       "files": [
         "css/bootstrap.css"
       ]
+    },
+    {
+      "library": "jquery@3.7.1",
+      "destination": "wwwroot/jquery/",
+      "files": [
+        "jquery.min.js"
+      ]
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/toastr/",
+      "files": [
+        "toastr.min.js",
+        "toastr.min.css"
+      ]
     }
   ]
 }

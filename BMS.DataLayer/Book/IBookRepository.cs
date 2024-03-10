@@ -11,5 +11,6 @@ namespace BMS.DataLayer.Book
     {
         public List<DataModel.Book> GetBooks();
         public bool Add(DataModel.Book book);
+        public void GetBooks2();
     }
 }

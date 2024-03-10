@@ -1,12 +1,7 @@
 ﻿@*@model BMS.DataModel.Publisher*@
 @model BookCreateModel;
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-    <link href="~/css/bootstrap.css" rel="stylesheet" />
-</head>
-<body>
+
     <div class="row">
         <div class="col-md-6 offset-3">
 
@@ -21,6 +16,7 @@
                     <select asp-for="AuhtorId" asp-items="@Model.Auhtors" class="form-control">
                         <option>Select Author</option>
                     </select>
+                    @*@Html.DropDownListFor(x => x.AuhtorId, Model.Auhtors)*@
                 </div>
                 <div class="mt-2">
                     <label class="form-label">ISBN No.</label>
@@ -40,5 +36,3 @@
             </form>
         </div>
     </div>
-</body>
-</html>

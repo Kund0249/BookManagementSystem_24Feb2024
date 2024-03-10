@@ -18,10 +18,12 @@ namespace BMS.DataModel
         public bool IsActive { get; set; }
         public string ImageUrl { get; set; }
 
+        [Required]
         [ForeignKey("author")]
         public int AuthorId { get; set; }
 
         //Navigation Properties
         public Author author { get; set; }
+
     }
 }

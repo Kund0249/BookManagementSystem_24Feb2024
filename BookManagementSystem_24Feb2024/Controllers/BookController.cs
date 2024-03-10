@@ -12,7 +12,7 @@ using BMS.DataLayer.Book;
 
 namespace BookManagementSystem_24Feb2024.Controllers
 {
-    public class BookController : Controller
+    public class BookController : BaseController
     {
         private readonly IAuthorRespository authorRespository;
         private readonly IWebHostEnvironment _Env;
@@ -29,6 +29,7 @@ namespace BookManagementSystem_24Feb2024.Controllers
 
         public IActionResult Index()
         {
+            //bookRepository.GetBooks2();
             return View(bookRepository.GetBooks());
         }
 
@@ -40,7 +41,7 @@ namespace BookManagementSystem_24Feb2024.Controllers
             book.Auhtors = authorRespository.GetAuthors().
                            Select(x => new SelectListItem()
                             {
-                                Text = x.AuthorName,
+                                Text = x.AuthorName ,//+ " - " + x.AuthorId.ToString(),
                                 Value = x.AuthorId.ToString()
                             }).ToList();
 
@@ -50,36 +51,54 @@ namespace BookManagementSystem_24Feb2024.Controllers
         [HttpPost]
         public IActionResult Create(BookCreateModel book)
         {
-            if (book.ImageFile != null)
+            if (!ModelState.IsValid)
             {
-                string Extension = System.IO.Path.GetExtension(book.ImageFile.FileName).ToLower();
-                if (Extension == ".jpeg" || Extension == ".png" || Extension == ".jpg")
+                book.Auhtors = authorRespository.GetAuthors().
+                             Select(x => new SelectListItem()
+                             {
+                                 Text = x.AuthorName,
+                                 Value = x.AuthorId.ToString()
+                             }).ToList();
+            }
+            else
+            {
+
+
+                if (book.ImageFile != null)
                 {
-                    string folderName = "CoverImages";
-                    string serverFolder = Path.Combine(_Env.WebRootPath, folderName);
+                    string Extension = System.IO.Path.GetExtension(book.ImageFile.FileName).ToLower();
+                    if (Extension == ".jpeg" || Extension == ".png" || Extension == ".jpg")
+                    {
+                        string folderName = "CoverImages";
+                        //_Env.WebRootPath : Return the actual path of wwwroot folder
+                        //string serverFolder = _Env.WebRootPath + "/" + folderName + "/myimag.png";
+                        string serverFolder = Path.Combine(_Env.WebRootPath, folderName);
 
-                    string fileName = Guid.NewGuid().ToString() + "_" + book.ImageFile.FileName;
-                    string filePath = Path.Combine(serverFolder, fileName);
-                    book.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
-                    book.FileName = fileName;
+                        string fileName = Guid.NewGuid().ToString() + "_" + book.ImageFile.FileName;
 
-                    //var model = BookCreateModel.Convert(book);
-                    //bookRepository.Add(model);
+                        string filePath = Path.Combine(serverFolder, fileName);
 
-                    bookRepository.Add(BookCreateModel.Convert(book));
-                    return RedirectToAction(nameof(Index));
+                        book.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                        book.FileName = fileName;
+
+                        //var model = BookCreateModel.Convert(book);
+                        //bookRepository.Add(model);
+
+                        bookRepository.Add(BookCreateModel.Convert(book));
+                        return RedirectToAction(nameof(Index));
+                    }
+
                 }
 
+
+                book.Auhtors = authorRespository.GetAuthors().
+                              Select(x => new SelectListItem()
+                              {
+                                  Text = x.AuthorName,
+                                  Value = x.AuthorId.ToString()
+                              }).ToList();
             }
-
-
-            book.Auhtors = authorRespository.GetAuthors().
-                          Select(x => new SelectListItem()
-                          {
-                              Text = x.AuthorName,
-                              Value = x.AuthorId.ToString()
-                          }).ToList();
-
             return View(book);
         }
     }

@@ -13,7 +13,11 @@ namespace BMS.DataModel
     {
         [Key]
         public int PublisherId { get; set; }
+
+        [Required]
         public string PublisherName { get; set; }
+
+        [Required]
         public string RegNo { get; set; }
     }
 }

@@ -1,0 +1,49 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    @*CSS files*@
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/toastr/toastr.min.css" rel="stylesheet" />
+
+    @*Script Files*@
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="~/toastr/toastr.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-action="Index" asp-controller="Book">BMS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" asp-action="Index" asp-controller="Book">Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Author">Author</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Publisher">Publisher</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row mt-3">
+            @RenderBody()
+        </div>
+    </div>
+
+
+    <script>
+             var data = @(TempData["Message"] != null? Html.Raw(TempData["Message"]) : Html.Raw("undefined"));
+            if (data) {
+                toastr[data.Type](data.Message, data.Title)
+                }
+    </script>
+</body>
+</html>

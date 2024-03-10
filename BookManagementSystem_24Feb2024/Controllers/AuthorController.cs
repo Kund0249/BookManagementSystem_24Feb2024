@@ -8,7 +8,7 @@ using BMS.DataLayer.Author;
 
 namespace BookManagementSystem_24Feb2024.Controllers
 {
-    public class AuthorController : Controller
+    public class AuthorController : BaseController
     {
         //  private readonly AuthorRespository respository;
         private readonly IAuthorRespository respository;
