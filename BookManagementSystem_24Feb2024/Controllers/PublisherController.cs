@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BMS.DataLayer;
 using BMS.DataModel;
 using BMS.DataLayer.Publisher;
+using Microsoft.AspNetCore.Http;
 
 namespace BookManagementSystem_24Feb2024.Controllers
 {
@@ -21,6 +22,11 @@ namespace BookManagementSystem_24Feb2024.Controllers
         }
         public IActionResult Index()
         {
+            //string SessionValue = HttpContext.Session.GetString("Mykey");
+            //if(SessionValue != null)
+            //{
+            //    ViewBag.Msg = SessionValue;
+            //}
             var data = repository.GetPublishers();
             return View(data);
         }

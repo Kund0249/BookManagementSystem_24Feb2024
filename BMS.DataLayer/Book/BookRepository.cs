@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,35 @@ namespace BMS.DataLayer.Book
         {
             try
             {
-                context.Books.Add(book);
-                context.SaveChanges();
-                return true;
+                //context.Books.Add(book);
+                //context.SaveChanges();
+                //return true;
+
+                string statuscode = string.Empty;
+                string Cs = @"data source=.;database=BookManagement;trusted_connection=true";
+                try
+                {
+                    using (SqlConnection con = new SqlConnection(Cs))
+                    {
+                        SqlCommand cmd = new SqlCommand("spAddeBook", con);
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@ImageUrl", book.ImageUrl);
+                        cmd.Parameters.AddWithValue("@bookName", book.BookName);
+                        cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
+                        cmd.Parameters.AddWithValue("@IsActive", book.IsActive);
+                        cmd.Parameters.AddWithValue("@AuthorId", book.AuthorId);
+
+                        con.Open();
+                        statuscode = (string)cmd.ExecuteScalar();
+                        con.Close();
+                    }
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
             catch (Exception)
             {
@@ -52,6 +79,37 @@ namespace BMS.DataLayer.Book
                              CombineValue = B.BookName + " : " + T.AuthorName
                          }
                          ).ToList();
+        }
+
+        public bool Update(DataModel.Book book)
+        {
+            string statuscode = string.Empty;
+            string Cs = @"data source=.;database=BookManagement;trusted_connection=true";
+            try
+            {
+                using(SqlConnection con = new SqlConnection(Cs))
+                {
+                    SqlCommand cmd = new SqlCommand("spUpdateBook", con);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@bookId", book.BookId);
+                    cmd.Parameters.AddWithValue("@bookName", book.BookName);
+                    cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
+
+                    con.Open();
+                    statuscode =  (string)cmd.ExecuteScalar();
+                    con.Close();
+                }
+
+                if (statuscode == "S001")
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

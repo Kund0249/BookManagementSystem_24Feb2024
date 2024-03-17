@@ -14,6 +14,12 @@ namespace BookManagementSystem_24Feb2024
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSession(option =>
+            {
+                option.IdleTimeout = System.TimeSpan.FromMinutes(2);
+                option.Cookie.HttpOnly = true;
+                option.Cookie.IsEssential = true;
+            });
 
             services.AddSingleton<IPublisherRepository, PublisherRepository>();
             services.AddSingleton<IAuthorRespository, AuthorRespository>();
@@ -61,6 +67,7 @@ namespace BookManagementSystem_24Feb2024
             //add your middleware to capture request and response time
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseRouting();
             app.UseEndpoints(Endpoint =>
             {

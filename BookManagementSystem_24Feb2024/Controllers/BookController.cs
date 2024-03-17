@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using BMS.DataLayer.Book;
+using Microsoft.AspNetCore.Http;
 
 namespace BookManagementSystem_24Feb2024.Controllers
 {
@@ -30,6 +31,10 @@ namespace BookManagementSystem_24Feb2024.Controllers
         public IActionResult Index()
         {
             //bookRepository.GetBooks2();
+
+            //Session["Email"] = "Value"
+            //HttpContext.Session.SetString("Mykey", "My Value");
+
             return View(bookRepository.GetBooks());
         }
 
