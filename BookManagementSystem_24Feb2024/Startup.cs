@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using BMS.DataLayer.Publisher;
 using BMS.DataLayer.Author;
 using BMS.DataLayer.Book;
+using BMS.DataLayer.ApplicationUser;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BookManagementSystem_24Feb2024
 {
@@ -20,10 +22,16 @@ namespace BookManagementSystem_24Feb2024
                 option.Cookie.HttpOnly = true;
                 option.Cookie.IsEssential = true;
             });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.LoginPath = "/Account/Login";
+                });
 
             services.AddSingleton<IPublisherRepository, PublisherRepository>();
             services.AddSingleton<IAuthorRespository, AuthorRespository>();
             services.AddSingleton<IBookRepository, BookRepository>();
+            services.AddSingleton<IAppUser, AppUser>();
 
         }
         //Configure your Application Request-Response Pipeline
@@ -69,9 +77,12 @@ namespace BookManagementSystem_24Feb2024
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(Endpoint =>
             {
-                Endpoint.MapControllerRoute("default", "{controller=Book}/{action=Index}/{id?}");
+                Endpoint.MapControllerRoute("default", "{controller=Book}/{action=Index}/{id?}")
+                .RequireAuthorization();
             });
         }
     }

@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using BMS.DataLayer.Book;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookManagementSystem_24Feb2024.Controllers
 {
+    //[Authorize]
     public class BookController : BaseController
     {
         private readonly IAuthorRespository authorRespository;

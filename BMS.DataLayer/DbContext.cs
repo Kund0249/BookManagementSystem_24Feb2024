@@ -22,7 +22,7 @@ namespace BMS.DataLayer
 
         public DbSet<DataModel.Publisher> Publishers { get; set; }
         public DbSet<DataModel.Author> Authors { get; set; }
-
         public DbSet<DataModel.Book> Books { get; set; }
+        public DbSet<DataModel.User> AppUser { get; set; }
     }
 }
